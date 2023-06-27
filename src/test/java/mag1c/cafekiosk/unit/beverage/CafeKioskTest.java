@@ -2,6 +2,7 @@ package mag1c.cafekiosk.unit.beverage;
 
 import mag1c.cafekiosk.unit.Latte;
 import mag1c.cafekiosk.unit.order.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ class CafeKioskTest {
         System.out.println(">>> 담긴 음료 수 : " + cafeKiosk.getBeverages().size());
         System.out.println(">>> 담긴 음료 : " + cafeKiosk.getBeverages().get(0).getName());
     }
-
+    @DisplayName("음료 1개를 추가하면 주문 목록에 담긴다.")
     @Test
     void add(){
         CafeKiosk cafeKiosk = new CafeKiosk();
@@ -78,8 +79,10 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
 
+    @DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
     @Test
     void calculateTotalPrice(){
+        //given
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
         Latte latte = new Latte();
@@ -87,8 +90,10 @@ class CafeKioskTest {
         cafeKiosk.add(americano);
         cafeKiosk.add(latte);
 
+        //when
         int totalPrice = cafeKiosk.calculateTotalPrice();
 
+        //then
         assertThat(totalPrice).isEqualTo(8500);
     }
 
@@ -116,6 +121,7 @@ class CafeKioskTest {
         assertThat(order.getBeverages()).isNotEmpty();
     }
 
+    @DisplayName("영업 시작 시간 이전에는 주문을 생성할 수 없다.")
     @Test
     void createOrderOutsideOpenTime(){
         CafeKiosk cafeKiosk = new CafeKiosk();
