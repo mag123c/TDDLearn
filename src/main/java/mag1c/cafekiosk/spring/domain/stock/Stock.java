@@ -20,20 +20,31 @@ public class Stock extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String productNumbers;
+    private String productNumber;
 
     private int quantity;
 
     @Builder
-    public Stock(String productNumbers, int quantity) {
-        this.productNumbers = productNumbers;
+    public Stock(String productNumber, int quantity) {
+        this.productNumber = productNumber;
         this.quantity = quantity;
     }
 
     public static Stock create(String productNumber, int quantity) {
         return Stock.builder()
-                .productNumbers(productNumber)
+                .productNumber(productNumber)
                 .quantity(quantity)
                 .build();
+    }
+
+    public boolean isQuantityLessThan(int quantity) {
+        return this.quantity < quantity;
+    }
+
+    public void deduckQuantity(int quantity) {
+        if(isQuantityLessThan(quantity)){
+            throw new IllegalArgumentException("차감할 재고 수량이 없습니다.");
+        }
+        this.quantity -= quantity;
     }
 }

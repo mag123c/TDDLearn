@@ -13,6 +13,7 @@ import java.util.List;
 import static mag1c.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static mag1c.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
@@ -103,8 +104,8 @@ class ProductRepositoryTest {
         assertThat(products).hasSize(2)
                 .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
-                        new Tuple("001", "아메리카노", SELLING),
-                        new Tuple("002", "카페라떼", HOLD)
+                        tuple("001", "아메리카노", SELLING),
+                        tuple("002", "카페라떼", HOLD)
                 );
 
     }
