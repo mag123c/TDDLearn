@@ -1,8 +1,8 @@
 package mag1c.cafekiosk.spring.api.service.order;
 
 import lombok.RequiredArgsConstructor;
-import mag1c.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import mag1c.cafekiosk.spring.api.service.order.response.OrderResponse;
+import mag1c.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import mag1c.cafekiosk.spring.domain.order.Order;
 import mag1c.cafekiosk.spring.domain.order.OrderRepository;
 import mag1c.cafekiosk.spring.domain.product.Product;
@@ -32,7 +32,7 @@ public class OrderService {
      * 재고 감소 -> 동시성 문제
      * optimistic lock / pessimistic lock / ... -> 순차 처리
      */
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 
